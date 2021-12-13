@@ -1,5 +1,5 @@
-import MessageListItem from '../components/MessageListItem';
-import { useState } from 'react';
+import MessageListItem from '../components/HeroListItem';
+import { useState, useEffect } from 'react';
 import { Message, getMessages } from '../data/messages';
 import {
   IonContent,
@@ -14,13 +14,16 @@ import {
 } from '@ionic/react';
 import './Home.css';
 
-const Home: React.FC = () => {
+import { useDispatch, useSelector } from 'react-redux';
+import { getHeroes } from '../redux/actions/heroesAction';
+import { RootState } from '../redux/types';
 
-  const [messages, setMessages] = useState<Message[]>([]);
+const Home: React.FC = () => {
+  const dispatch = useDispatch();
+  const { heroes, isLoading } = useSelector((state: RootState) => state.heroes);
 
   useIonViewWillEnter(() => {
-    const msgs = getMessages();
-    setMessages(msgs);
+    dispatch(getHeroes("1"))
   });
 
   const refresh = (e: CustomEvent) => {
@@ -28,6 +31,11 @@ const Home: React.FC = () => {
       e.detail.complete();
     }, 3000);
   };
+
+  const getHeroId = (url: string) => {
+    let arr = url.split("/");
+    return arr[arr.length - 2]
+  }
 
   return (
     <IonPage id="home-page">
@@ -50,7 +58,7 @@ const Home: React.FC = () => {
         </IonHeader>
 
         <IonList>
-          {messages.map(m => <MessageListItem key={m.id} message={m} />)}
+          {isLoading ? "" : heroes.map(hero => <MessageListItem key={hero.name} heroName={hero.name} heroId={getHeroId(hero.url)}  />)}
         </IonList>
       </IonContent>
     </IonPage>

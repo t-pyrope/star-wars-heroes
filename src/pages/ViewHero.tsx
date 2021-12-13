@@ -15,15 +15,19 @@ import {
 } from '@ionic/react';
 import { personCircle } from 'ionicons/icons';
 import { useParams } from 'react-router';
-import './ViewMessage.css';
+import { useDispatch, useSelector } from 'react-redux';
 
-function ViewMessage() {
-  const [message, setMessage] = useState<Message>();
+import './ViewMessage.css';
+import { RootState } from '../redux/types';
+import { getHero } from '../redux/actions/heroAction';
+
+function ViewHero() {
   const params = useParams<{ id: string }>();
+  const dispatch = useDispatch();
+  const { heroName, isLoading } = useSelector((state: RootState) => state.hero)
 
   useIonViewWillEnter(() => {
-    const msg = getMessage(parseInt(params.id, 10));
-    setMessage(msg);
+    dispatch(getHero(params.id))
   });
 
   return (
@@ -37,15 +41,15 @@ function ViewMessage() {
       </IonHeader>
 
       <IonContent fullscreen>
-        {message ? (
+        {!isLoading ? (
           <>
             <IonItem>
               <IonIcon icon={personCircle} color="primary"></IonIcon>
               <IonLabel className="ion-text-wrap">
                 <h2>
-                  {message.fromName}
+                  {heroName}
                   <span className="date">
-                    <IonNote>{message.date}</IonNote>
+                    {/* <IonNote>{message.date}</IonNote> */}
                   </span>
                 </h2>
                 <h3>
@@ -55,7 +59,7 @@ function ViewMessage() {
             </IonItem>
 
             <div className="ion-padding">
-              <h1>{message.subject}</h1>
+              {/* <h1>{message.subject}</h1> */}
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -75,4 +79,4 @@ function ViewMessage() {
   );
 }
 
-export default ViewMessage;
+export default ViewHero;
