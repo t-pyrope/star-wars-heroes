@@ -20,16 +20,19 @@ import { RootState, HeroFromAPIType } from '../redux/types';
 
 const Home: React.FC = () => {
   const [data, setData] = useState<HeroFromAPIType[]>([])
-  const [page, setPage] = useState("1")
+  const [page, setPage] = useState("1");
+  const [infiniteDisabled, setInfiniteDisabled] = useState(false);
   const dispatch = useDispatch();
   const { heroes, isLoading, totalPages } = useSelector((state: RootState) => state.heroes);
 
   useEffect(() => {
+    console.log('page', page)
     dispatch(getHeroes(page))
-  }, [page]);
+  }, [page, dispatch]);
 
   useEffect(() => {
-    setData([...data, ...heroes])
+    console.log('heroes', heroes)
+    setData(d => [...d, ...heroes])
   }, [heroes])
 
   const refresh = (e: CustomEvent) => {
@@ -43,9 +46,16 @@ const Home: React.FC = () => {
     return arr[arr.length - 2]
   }
 
-  const loadData = () => {
+  const loadData = (e: any) => {
     let p = +page + 1;
-    if (p < totalPages) setPage(String(p))
+    console.log('p', p)
+    console.log('totalPages', totalPages)
+    if (p <= totalPages) {
+      setPage(String(p))
+      e.target.complete();
+    } else {
+      setInfiniteDisabled(true);
+    }
   }
 
   return (
@@ -69,20 +79,20 @@ const Home: React.FC = () => {
         </IonHeader>
 
         <IonList lines="full">
-          {isLoading ? "" : heroes.map(hero => <MessageListItem key={hero.name} heroName={hero.name} heroId={getHeroId(hero.url)}  />)}
+          {!data.length ? "" : data.map(hero => <MessageListItem key={hero.name} heroName={hero.name} heroId={getHeroId(hero.url)}  />)}
         </IonList>
-      </IonContent>
 
-      <IonInfiniteScroll
+        <IonInfiniteScroll
           onIonInfinite={loadData}
-          threshold="100px"
-          disabled={false}
+          threshold="50px"
+          disabled={infiniteDisabled}
         >
           <IonInfiniteScrollContent
             loadingSpinner="bubbles"
             loadingText="Loading more data..."
           ></IonInfiniteScrollContent>
         </IonInfiniteScroll>
+      </IonContent>
     </IonPage>
   );
 };

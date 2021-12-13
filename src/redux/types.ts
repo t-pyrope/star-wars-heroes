@@ -10,6 +10,10 @@ export const GET_FILMS = 'GET_FILM';
 export const LOADING_FILMS = 'LOADING_FILM';
 export const LOADING_FILMS_FAILED = 'LOADING_FILM_FAILED';
 
+export const GET_STARSHIPS = 'GET_STARSHIPS';
+export const LOADING_STARSHIPS = 'LOADING_STARSHIPS';
+export const LOADING_STARSHIPS_FAILED = 'LOADING_STARSHIPS_FAILED';
+
 interface StateBase {
     isLoading: boolean,
     isError: boolean
@@ -49,8 +53,13 @@ export interface FilmsState extends StateBase {
     films: string[],
 }
 
+export interface StarshipsState extends StateBase {
+    starships: string[],
+}
+
 export type RootState = {
     hero: HeroState,
     heroes: HeroesState,
     films: FilmsState,
+    starships: StarshipsState,
 }

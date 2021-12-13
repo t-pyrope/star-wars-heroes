@@ -1,18 +1,8 @@
 import {
-  IonBackButton,
-  IonButtons,
-  IonContent,
-  IonHeader,
-  IonIcon,
-  IonItem,
-  IonLabel,
-  IonNote,
-  IonPage,
-  IonToolbar,
-  useIonViewWillEnter,
-  IonSegment,
+  IonBackButton, IonButtons, IonContent,
+  IonHeader, IonItem, IonLabel, IonNote,
+  IonPage, IonToolbar, useIonViewWillEnter,
 } from '@ionic/react';
-import { personCircle } from 'ionicons/icons';
 import { useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -20,11 +10,13 @@ import './ViewMessage.css';
 import { RootState } from '../redux/types';
 import { getHero } from '../redux/actions/heroAction';
 import FilmsSegment from '../components/FilmsSegment';
+import starWarsIcon from '../assets/img/light-saber.png';
+import StarshipsList from '../components/StarshipsList';
 
 function ViewHero() {
   const params = useParams<{ id: string }>();
   const dispatch = useDispatch();
-  const { heroName, isLoading, films, starships } = useSelector((state: RootState) => state.hero)
+  const { heroName, isLoading, birthYear } = useSelector((state: RootState) => state.hero)
 
   useIonViewWillEnter(() => {
     dispatch(getHero(params.id))
@@ -35,7 +27,7 @@ function ViewHero() {
       <IonHeader translucent>
         <IonToolbar>
           <IonButtons slot="start">
-            <IonBackButton text="Inbox" defaultHref="/home"></IonBackButton>
+            <IonBackButton text=" Back to the list" defaultHref="/home"></IonBackButton>
           </IonButtons>
         </IonToolbar>
       </IonHeader>
@@ -44,26 +36,25 @@ function ViewHero() {
         {!isLoading ? (
           <>
             <IonItem>
-              <IonIcon icon={personCircle} color="primary"></IonIcon>
+              <img src={starWarsIcon} alt="" width="50" height="50" style={{ padding: '0.5rem' }} />
+              {' '}
               <IonLabel className="ion-text-wrap">
                 <h2>
                   {heroName}
-                  <span className="date">
-                    {/* <IonNote>{message.date}</IonNote> */}
-                  </span>
                 </h2>
                 <h3>
-                  To: <IonNote>Me</IonNote>
+                  <IonNote>Year or birth: {birthYear}</IonNote>
                 </h3>
               </IonLabel>
             </IonItem>
             <IonItem>
               <FilmsSegment />
             </IonItem>
+            <IonItem>
+              <StarshipsList />
+            </IonItem>
           </>
-        ) : (
-          <div>Message not found</div>
-        )}
+        ) : ''}
       </IonContent>
     </IonPage>
   );
