@@ -1,30 +1,36 @@
 import MessageListItem from '../components/HeroListItem';
 import { useState, useEffect } from 'react';
-import { Message, getMessages } from '../data/messages';
 import {
   IonContent,
   IonHeader,
+  IonInfiniteScroll,
+  IonInfiniteScrollContent,
   IonList,
   IonPage,
   IonRefresher,
   IonRefresherContent,
   IonTitle,
   IonToolbar,
-  useIonViewWillEnter
 } from '@ionic/react';
 import './Home.css';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { getHeroes } from '../redux/actions/heroesAction';
-import { RootState } from '../redux/types';
+import { RootState, HeroFromAPIType } from '../redux/types';
 
 const Home: React.FC = () => {
+  const [data, setData] = useState<HeroFromAPIType[]>([])
+  const [page, setPage] = useState("1")
   const dispatch = useDispatch();
-  const { heroes, isLoading } = useSelector((state: RootState) => state.heroes);
+  const { heroes, isLoading, totalPages } = useSelector((state: RootState) => state.heroes);
 
-  useIonViewWillEnter(() => {
-    dispatch(getHeroes("1"))
-  });
+  useEffect(() => {
+    dispatch(getHeroes(page))
+  }, [page]);
+
+  useEffect(() => {
+    setData([...data, ...heroes])
+  }, [heroes])
 
   const refresh = (e: CustomEvent) => {
     setTimeout(() => {
@@ -37,11 +43,16 @@ const Home: React.FC = () => {
     return arr[arr.length - 2]
   }
 
+  const loadData = () => {
+    let p = +page + 1;
+    if (p < totalPages) setPage(String(p))
+  }
+
   return (
     <IonPage id="home-page">
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Inbox</IonTitle>
+          <IonTitle>Star Wars Heroes</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
@@ -57,10 +68,21 @@ const Home: React.FC = () => {
           </IonToolbar>
         </IonHeader>
 
-        <IonList>
+        <IonList lines="full">
           {isLoading ? "" : heroes.map(hero => <MessageListItem key={hero.name} heroName={hero.name} heroId={getHeroId(hero.url)}  />)}
         </IonList>
       </IonContent>
+
+      <IonInfiniteScroll
+          onIonInfinite={loadData}
+          threshold="100px"
+          disabled={false}
+        >
+          <IonInfiniteScrollContent
+            loadingSpinner="bubbles"
+            loadingText="Loading more data..."
+          ></IonInfiniteScrollContent>
+        </IonInfiniteScroll>
     </IonPage>
   );
 };

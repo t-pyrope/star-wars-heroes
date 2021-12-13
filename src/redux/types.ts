@@ -22,7 +22,7 @@ export interface HeroState extends StateBase {
     starships: string[],
 }
 
-type HeroFromAPIType = {
+export type HeroFromAPIType = {
     name: string,
     height: string,
     mass: string,
@@ -42,6 +42,7 @@ type HeroFromAPIType = {
 
 export interface HeroesState extends StateBase {
     heroes: HeroFromAPIType[],
+    totalPages: number,
 }
 
 export interface FilmsState extends StateBase {

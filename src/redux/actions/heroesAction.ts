@@ -12,7 +12,8 @@ export const getHeroes = (page: string) => async (dispatch: Dispatch) => {
             dispatch({
                 type: GET_HEROES,
                 payload: {
-                    heroes: res.data.results
+                    heroes: res.data.results,
+                    totalPages: Math.floor(res.data.count / 10),
                 }
             })
         }).catch(e => {

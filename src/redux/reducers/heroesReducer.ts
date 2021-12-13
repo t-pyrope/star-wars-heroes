@@ -6,6 +6,7 @@ const initState: HeroesState = {
     heroes: [],
     isLoading: false,
     isError: false,
+    totalPages: 0,
 }
 
 const heroesReducer = (state:HeroesState = initState, action: AnyAction) => {
@@ -16,6 +17,7 @@ const heroesReducer = (state:HeroesState = initState, action: AnyAction) => {
                 heroes: action.payload.heroes,
                 isLoading: false,
                 isError: false,
+                totalPages: action.payload.totalPages,
             }
         case LOADING_HEROES:
             return {
