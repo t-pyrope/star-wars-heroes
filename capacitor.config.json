@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "star-wars-heroes",
+	"webDir": "build",
+	"bundledWebRuntime": false
+}

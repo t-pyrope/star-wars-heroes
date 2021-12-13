@@ -1,0 +1,8 @@
+{
+  "name": "star-wars-heroes",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react",
+  "id": "2ec543b0"
+}
