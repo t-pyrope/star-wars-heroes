@@ -1,5 +1,3 @@
-import { useState } from 'react';
-import { Message, getMessage } from '../data/messages';
 import {
   IonBackButton,
   IonButtons,
@@ -12,6 +10,7 @@ import {
   IonPage,
   IonToolbar,
   useIonViewWillEnter,
+  IonSegment,
 } from '@ionic/react';
 import { personCircle } from 'ionicons/icons';
 import { useParams } from 'react-router';
@@ -20,11 +19,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import './ViewMessage.css';
 import { RootState } from '../redux/types';
 import { getHero } from '../redux/actions/heroAction';
+import FilmsSegment from '../components/FilmsSegment';
 
 function ViewHero() {
   const params = useParams<{ id: string }>();
   const dispatch = useDispatch();
-  const { heroName, isLoading } = useSelector((state: RootState) => state.hero)
+  const { heroName, isLoading, films, starships } = useSelector((state: RootState) => state.hero)
 
   useIonViewWillEnter(() => {
     dispatch(getHero(params.id))
@@ -57,19 +57,9 @@ function ViewHero() {
                 </h3>
               </IonLabel>
             </IonItem>
-
-            <div className="ion-padding">
-              {/* <h1>{message.subject}</h1> */}
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </p>
-            </div>
+            <IonItem>
+              <FilmsSegment />
+            </IonItem>
           </>
         ) : (
           <div>Message not found</div>

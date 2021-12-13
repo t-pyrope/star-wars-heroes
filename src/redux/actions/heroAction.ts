@@ -12,7 +12,10 @@ export const getHero = (heroId: string) => async(dispatch: Dispatch) => {
             dispatch({
                 type: GET_HERO,
                 payload: {
-                    heroName: res.data.name
+                    heroName: res.data.name,
+                    birthYear: res.data.birth_year,
+                    films: res.data.films,
+                    starships: res.data.starships,
                 }
             })
         }).catch(e => {

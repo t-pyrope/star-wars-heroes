@@ -2,7 +2,14 @@ import { AnyAction } from "redux";
 
 import { GET_HERO, HeroState, LOADING_HERO, LOADING_HERO_FAILED } from "../types";
 
-const initState: HeroState = { heroName: '', isLoading: false, isError: false}
+const initState: HeroState = {
+    heroName: '',
+    birthYear: '',
+    films: [],
+    starships: [],
+    isLoading: false,
+    isError: false
+}
 
 const heroReducer = (state: HeroState = initState, action: AnyAction) => {
     switch(action.type){
@@ -10,6 +17,9 @@ const heroReducer = (state: HeroState = initState, action: AnyAction) => {
             return {
                 ...state,
                 heroName: action.payload.heroName,
+                birthYear: action.payload.birthYear,
+                films: action.payload.films,
+                starships: action.payload.starships,
                 isLoading: false,
                 isError: false,
             }
@@ -17,6 +27,9 @@ const heroReducer = (state: HeroState = initState, action: AnyAction) => {
             return {
                 ...state,
                 heroName: '',
+                birthYear: '',
+                films: [],
+                starships: [],
                 isLoading: true,
                 isError: false
             }
@@ -24,11 +37,14 @@ const heroReducer = (state: HeroState = initState, action: AnyAction) => {
             return {
                 ...state,
                 heroName: '',
+                birthYear: '',
+                films: [],
+                starships: [],
                 isLoading: false,
                 isError: true,
             }
         default:
-            return {...state}
+            return { ...state }
     }
 }
 
