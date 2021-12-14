@@ -1,6 +1,7 @@
-import { AnyAction } from 'redux';
+import type { AnyAction } from 'redux';
 
-import { FilmsState, GET_FILMS, LOADING_FILMS, LOADING_FILMS_FAILED } from "../types";
+import type { FilmsState} from "../types";
+import { GET_FILMS, LOADING_FILMS, LOADING_FILMS_FAILED } from "../types";
 
 const initState: FilmsState = {
     films: [],
@@ -8,7 +9,7 @@ const initState: FilmsState = {
     isError: false,
 }
 
-const filmsReducer = (state: FilmsState = initState, action: AnyAction) => {
+const filmsReducer = (state: FilmsState = initState, action: AnyAction): FilmsState => {
     switch(action.type) {
         case GET_FILMS:
             return {

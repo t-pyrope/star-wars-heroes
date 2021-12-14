@@ -1,9 +1,9 @@
-import { Dispatch } from "redux";
 import axios from 'axios';
+import type { Dispatch } from "redux";
 
 import { GET_STARSHIPS, LOADING_STARSHIPS, LOADING_STARSHIPS_FAILED } from "../types";
 
-export const getStarships = (urls: string[]) => async(dispatch:Dispatch) => {
+export const getStarships = (urls: string[]) => async(dispatch:Dispatch): Promise<void> => {
     dispatch({ type: LOADING_STARSHIPS });
 
     const starships: string[] = []

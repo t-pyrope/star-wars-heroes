@@ -1,6 +1,7 @@
-import { Redirect, Route } from 'react-router-dom';
 import { IonApp, IonRouterOutlet } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
+import { Redirect, Route } from 'react-router-dom';
+
 import Home from './pages/Home';
 import ViewHero from './pages/ViewHero';
 
@@ -27,14 +28,14 @@ const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
       <IonRouterOutlet>
-        <Route path="/" exact={true}>
-          <Redirect to="/home" />
-        </Route>
         <Route path="/home" exact={true}>
           <Home />
         </Route>
         <Route path="/hero/:id">
            <ViewHero />
+        </Route>
+        <Route path="/">
+          <Redirect to="/home" />
         </Route>
       </IonRouterOutlet>
     </IonReactRouter>

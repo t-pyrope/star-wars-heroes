@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
+
+import filmsReducer from './filmsReducer';
 import heroReducer from './heroReducer';
 import heroesReducer from './heroesReducer';
-import filmsReducer from './filmsReducer';
 import starshipsReducer from './starshipsReducer';
 
 const rootReducer = combineReducers({

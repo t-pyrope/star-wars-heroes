@@ -1,6 +1,7 @@
-import { AnyAction } from "redux";
+import type { AnyAction } from "redux";
 
-import { GET_HERO, HeroState, LOADING_HERO, LOADING_HERO_FAILED } from "../types";
+import type { HeroState} from "../types";
+import { GET_HERO, LOADING_HERO, LOADING_HERO_FAILED } from "../types";
 
 const initState: HeroState = {
     heroName: '',
@@ -11,7 +12,7 @@ const initState: HeroState = {
     isError: false
 }
 
-const heroReducer = (state: HeroState = initState, action: AnyAction) => {
+const heroReducer = (state: HeroState = initState, action: AnyAction): HeroState => {
     switch(action.type){
         case GET_HERO:
             return {

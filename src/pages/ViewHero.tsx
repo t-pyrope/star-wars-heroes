@@ -3,17 +3,18 @@ import {
   IonHeader, IonItem, IonLabel, IonNote,
   IonPage, IonToolbar, useIonViewWillEnter,
 } from '@ionic/react';
-import { useParams } from 'react-router';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router';
 
 import './ViewMessage.css';
-import { RootState } from '../redux/types';
-import { getHero } from '../redux/actions/heroAction';
-import FilmsSegment from '../components/FilmsSegment';
 import starWarsIcon from '../assets/img/light-saber.png';
+import FilmsSegment from '../components/FilmsSegment';
 import StarshipsList from '../components/StarshipsList';
+import { getHero } from '../redux/actions/heroAction';
+import type { RootState } from '../redux/types';
 
-function ViewHero() {
+const ViewHero = (): React.ReactElement => {
   const params = useParams<{ id: string }>();
   const dispatch = useDispatch();
   const { heroName, isLoading, birthYear } = useSelector((state: RootState) => state.hero)

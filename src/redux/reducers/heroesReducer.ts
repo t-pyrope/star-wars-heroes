@@ -1,6 +1,7 @@
-import { AnyAction } from 'redux';
+import type { AnyAction } from 'redux';
 
-import { HeroesState, GET_HEROES, LOADING_HEROES, LOADING_HEROES_FAILED } from '../types';
+import type { HeroesState} from '../types';
+import { GET_HEROES, LOADING_HEROES, LOADING_HEROES_FAILED } from '../types';
 
 const initState: HeroesState = {
     heroes: [],
@@ -9,7 +10,7 @@ const initState: HeroesState = {
     totalPages: 0,
 }
 
-const heroesReducer = (state:HeroesState = initState, action: AnyAction) => {
+const heroesReducer = (state:HeroesState = initState, action: AnyAction): HeroesState => {
     switch(action.type){
         case GET_HEROES:
             return {

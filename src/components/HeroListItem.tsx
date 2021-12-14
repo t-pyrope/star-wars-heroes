@@ -1,9 +1,6 @@
 import {
-  IonItem,
-  IonLabel,
-  IonNote
-  } from '@ionic/react';
-// import { Message } from '../data/messages';
+  IonItem, IonLabel, IonNote
+} from '@ionic/react';
 import './MessageListItem.css';
 
 interface HeroListItemProps {

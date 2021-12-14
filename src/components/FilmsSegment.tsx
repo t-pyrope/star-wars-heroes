@@ -1,14 +1,13 @@
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import {
-    useIonViewWillEnter, IonSegment, IonSegmentButton,
-    IonLabel,
+    IonSegment, IonSegmentButton, IonLabel,
 } from '@ionic/react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
-import { RootState } from '../redux/types';
 import { getFilms } from '../redux/actions/filmsAction';
+import type { RootState } from '../redux/types';
 
-const FilmsSegment = () => {
+const FilmsSegment = (): React.ReactElement => {
     const { films, isLoading } = useSelector((state: RootState) => state.films);
     const { films: heroFilms } = useSelector((state: RootState) => state.hero);
     const dispatch = useDispatch();

@@ -1,10 +1,10 @@
 import axios from 'axios';
-import { Dispatch } from 'redux';
+import type { Dispatch } from 'redux';
 
-import { GET_HERO, LOADING_HERO, LOADING_HERO_FAILED } from "../types";
 import { heroURL } from "../../api";
+import { GET_HERO, LOADING_HERO, LOADING_HERO_FAILED } from "../types";
 
-export const getHero = (heroId: string) => async(dispatch: Dispatch) => {
+export const getHero = (heroId: string) => async(dispatch: Dispatch): Promise<void> => {
     dispatch({ type: LOADING_HERO })
 
     axios.get(heroURL(heroId))

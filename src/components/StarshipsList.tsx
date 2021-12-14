@@ -1,11 +1,11 @@
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import { IonList, IonItem } from '@ionic/react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
-import { RootState } from '../redux/types';
 import { getStarships } from '../redux/actions/starshipAction';
+import type { RootState } from '../redux/types';
 
-const StarshipsList = () => {
+const StarshipsList = (): React.ReactElement => {
     const dispatch = useDispatch();
     const { starships: urls } = useSelector((state: RootState) => state.hero);
     const { starships } = useSelector((state: RootState) => state.starships)

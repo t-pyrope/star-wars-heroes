@@ -1,5 +1,7 @@
-import { AnyAction } from "redux"
-import { GET_STARSHIPS, LOADING_STARSHIPS, LOADING_STARSHIPS_FAILED, StarshipsState } from "../types"
+import type { AnyAction } from "redux"
+
+import type { StarshipsState } from "../types";
+import { GET_STARSHIPS, LOADING_STARSHIPS, LOADING_STARSHIPS_FAILED } from "../types"
 
 const initState: StarshipsState = {
     starships: [],
@@ -7,7 +9,7 @@ const initState: StarshipsState = {
     isError: false,
 }
 
-const starshipsReducer = (state: StarshipsState = initState, action: AnyAction) => {
+const starshipsReducer = (state: StarshipsState = initState, action: AnyAction): StarshipsState => {
     switch(action.type){
         case GET_STARSHIPS:
             return {
