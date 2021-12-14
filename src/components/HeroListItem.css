@@ -6,6 +6,7 @@ ion-item {
 ion-label {
   margin-top: 12px;
   margin-bottom: 12px;
+  white-space: normal !important;
 }
 
 ion-item h2 {

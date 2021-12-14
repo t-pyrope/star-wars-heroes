@@ -7,7 +7,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 
-import './ViewMessage.css';
+import './ViewHero.css';
 import starWarsIcon from '../assets/img/light-saber.png';
 import FilmsSegment from '../components/FilmsSegment';
 import StarshipsList from '../components/StarshipsList';
@@ -28,7 +28,7 @@ const ViewHero = (): React.ReactElement => {
       <IonHeader translucent>
         <IonToolbar>
           <IonButtons slot="start">
-            <IonBackButton text=" Back to the list" defaultHref="/home"></IonBackButton>
+            <IonBackButton text=" Back to the list" defaultHref="/"></IonBackButton>
           </IonButtons>
         </IonToolbar>
       </IonHeader>
@@ -48,12 +48,8 @@ const ViewHero = (): React.ReactElement => {
                 </h3>
               </IonLabel>
             </IonItem>
-            <IonItem>
-              <FilmsSegment />
-            </IonItem>
-            <IonItem>
-              <StarshipsList />
-            </IonItem>
+            <FilmsSegment />
+            <StarshipsList />
           </>
         ) : ''}
       </IonContent>

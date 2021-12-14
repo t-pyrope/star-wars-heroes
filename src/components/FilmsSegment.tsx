@@ -1,5 +1,6 @@
 import {
-    IonSegment, IonSegmentButton, IonLabel,
+    IonSegment, IonSegmentButton, IonLabel, IonTitle,
+    IonToolbar, IonItem,
 } from '@ionic/react';
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -17,12 +18,22 @@ const FilmsSegment = (): React.ReactElement => {
     }, [heroFilms, dispatch])
 
     return(
-        <IonSegment onIonChange={e => console.log('Segment selected', e.detail.value)} mode="ios">
-            {!films.length ? '' : films.map(film =>
-                <IonSegmentButton value={film} key={film}>
-                    <IonLabel>{film}</IonLabel>
-                </IonSegmentButton>)}
-        </IonSegment>
+        <>
+            <IonItem>
+                <IonToolbar>
+                    <IonTitle>Films</IonTitle>
+                </IonToolbar>
+            </IonItem>
+            {
+                isLoading ? <div style={{ paddingLeft: '0.5rem', paddingTop: '0.7rem' }}>Loading...</div>
+                    : <IonSegment onIonChange={e => console.log('Segment selected', e.detail.value)} mode="ios" scrollable={true}>
+                        {!films.length ? '' : films.map(film =>
+                            <IonSegmentButton value={film} key={film}>
+                                <IonLabel>{film}</IonLabel>
+                            </IonSegmentButton>)}
+                    </IonSegment>
+            }
+        </>
     )
 }
 

@@ -17,7 +17,7 @@ const Home: React.FC = () => {
   const [page, setPage] = useState("1");
   const [infiniteDisabled, setInfiniteDisabled] = useState(false);
   const dispatch = useDispatch();
-  const { heroes, isLoading, totalPages } = useSelector((state: RootState) => state.heroes);
+  const { heroes, totalPages } = useSelector((state: RootState) => state.heroes);
 
   useEffect(() => {
     dispatch(getHeroes(page))
@@ -65,7 +65,7 @@ const Home: React.FC = () => {
         <IonHeader collapse="condense">
           <IonToolbar>
             <IonTitle size="large">
-              Inbox
+              Star Wars Heroes
             </IonTitle>
           </IonToolbar>
         </IonHeader>

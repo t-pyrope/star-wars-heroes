@@ -1,7 +1,7 @@
 import {
-  IonItem, IonLabel, IonNote
+  IonItem, IonLabel
 } from '@ionic/react';
-import './MessageListItem.css';
+import './HeroListItem.css';
 
 interface HeroListItemProps {
   heroName: string,
