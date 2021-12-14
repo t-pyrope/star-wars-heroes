@@ -15,7 +15,7 @@ const StarshipsList = (): React.ReactElement => {
     }, [dispatch, urls])
 
     return(
-        <IonList>
+        <IonList lines="none">
             {starships.length ? starships.map(starship => <IonItem key={starship}>{starship}</IonItem>) : ''}
         </IonList>
     )

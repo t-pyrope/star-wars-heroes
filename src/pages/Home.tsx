@@ -8,7 +8,7 @@ import { useState, useEffect } from 'react';
 import './Home.css';
 import { useDispatch, useSelector } from 'react-redux';
 
-import MessageListItem from '../components/HeroListItem';
+import HeroListItem from '../components/HeroListItem';
 import { getHeroes } from '../redux/actions/heroesAction';
 import type { RootState, HeroFromAPIType } from '../redux/types';
 
@@ -71,7 +71,7 @@ const Home: React.FC = () => {
         </IonHeader>
 
         <IonList lines="full">
-          {!data.length ? "" : data.map(hero => <MessageListItem key={hero.name} heroName={hero.name} heroId={getHeroId(hero.url)}  />)}
+          {!data.length ? "" : data.map(hero => <HeroListItem key={hero.name} heroName={hero.name} heroId={getHeroId(hero.url)}  />)}
         </IonList>
 
         <IonInfiniteScroll
