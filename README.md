@@ -18,4 +18,4 @@ npm install
 
 `ionic serve`
 
-Open [http://http://localhost:8100](http://http://localhost:8100) to view it in the browser.
+Open [http://localhost:8100](http://localhost:8100) to view it in the browser.
