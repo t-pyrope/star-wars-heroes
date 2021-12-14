@@ -14,17 +14,21 @@ import type { RootState, HeroFromAPIType } from '../redux/types';
 
 const Home: React.FC = () => {
   const [data, setData] = useState<HeroFromAPIType[]>([])
-  const [page, setPage] = useState("1");
+  const [page, setPage] = useState("2");
   const [infiniteDisabled, setInfiniteDisabled] = useState(false);
   const dispatch = useDispatch();
   const { heroes, totalPages } = useSelector((state: RootState) => state.heroes);
+
+  useEffect(() => {
+    dispatch(getHeroes("1"))
+  }, [])
 
   useEffect(() => {
     dispatch(getHeroes(page))
   }, [page, dispatch]);
 
   useEffect(() => {
-    if (!data.length || (heroes[heroes.length - 1].name !== data[data.length - 1].name)) {
+    if (!data.length || (heroes[heroes.length - 1].name !== data[data.length - 1].name) || (data.length < 11 && (heroes[heroes.length - 1].name !== data[data.length - 1].name)) ) {
       setData(d => [...d, ...heroes])
     }
   }, [heroes])
